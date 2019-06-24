@@ -1,0 +1,36 @@
+# Allways use specific FROM tag, DON'T use 'latest'
+FROM wordpress:5.2.2-php7.2-apache
+
+
+
+## WP Engine:
+## If your repository contains the entire engine together with the contents, plugins and themes, make sure to add a Dockerfile with the following content along wp-admin, wp-content, and wp-includes directories
+
+# COPY . /var/www/html
+
+## WP Theme
+## If your repository contains only the sources of the theme that you deploy, add a Dockerfile with the following content to the directory with your theme’s sources
+
+# COPY . /var/www/html/wp-content/themes/mytheme/
+
+## WP Plug-in
+## If your repository contains only the sources of the plug-ins that you deploy, add a Dockerfile with the following content to the directory with your plug-in’s sources
+
+#COPY . /var/www/html/wp-content/plugins/myplugin/
+
+
+## WP Plug-in AND Theme
+
+## If your repository contains plug-ins and themes, but lacks the WP Engine, you must use the Dockerfile to upload them to the proper location.
+
+## For instance, let’s assume that your repository contains 4 directories: mytheme1, mytheme2, myplugin1 and myplugin2. In this case, you have to add the Dockerfile along all these directories with the following content
+
+#COPY mytheme1 /var/www/html/wp-content/themes/mytheme1/
+#COPY mytheme2 /var/www/html/wp-content/themes/mytheme2/
+#COPY myplugin1 /var/www/html/wp-content/plugins/myplugin1/
+#COPY myplugin2 /var/www/html/wp-content/plugins/myplugin2/*
+
+
+
+
+

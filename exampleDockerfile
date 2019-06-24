@@ -1,0 +1,42 @@
+# Allways use specific FROM tag, DON'T use 'latest'
+FROM wordpress:php7.1-apache
+
+ENV NGINX_VERSION   1.12.1-1~jessie \
+    NJS_VERSION     1.12.1.0.1.10-1~jessie \
+    COMPOSER_VERSION=1.5.2 \
+    NODE_VERSION 6.11.4
+
+# Update default configs via ENV, RUN, ENTRYPOINT step 1 of 3:
+ENV MYSQL_ALLOW_EMPTY_PASWORD=true \
+    MYSQL_DATABASE=mydbname \
+    MYSQL_CONFIG=/etc/mysql/mysql.conf.d/mysqld.cnf \
+    MYSQL_BUFFERSIZE=18G \
+    MYSQL_LOGSIZE=512M \
+    MYSQL_LOG_BUFFERSIZE=64M \
+    MYSQL_FLUSHLOG=1 \
+    MYSQL_FLUSHMETHOD=O_DIRECT
+
+# Specify versions for critical packages
+RUN apt update && apt install \
+    ca-certificate \
+    g++ \
+    ldap-utils=2.4.40+dfsg-1+deb83u \
+    libedit-dev=3.1-20140620-2 \
+    xxx
+
+# Update default configs via ENV, RUN, ENTRYPOINT step 2 of 3:
+RUN echo "innodb_buffer_pool_size = ${MYSQL_BUFFERSIZE}" >> ${MYSQL_CONFIG} && \
+    echo "innodb_log_file_size = ${MYSQL_LOGSIZE}" >> ${MYSQL_CONFIG} && \
+    echo "innodb_log_buffer_size = ${MYSQL_LOG_BUFFERSIZE}" >> ${MYSQL_CONFIG} && \
+    echo "innodb_flush_log_at_trx_commit = ${MYSQL_FLUSHLOG}" >> ${MYSQL_CONFIG} && \
+    echo "innodb_flush_method = ${MYSQL_FLUSHMETHOD}" >> ${MYSQL_CONFIG}
+
+# DON'T COPY in environment config at image build >>> !!!!
+#COPY test-environment.json test-environment.json
+#COPY dev-environment.json dev-environment.json
+#COPY prod-environment.json prod-environment.json
+# <<< !!!
+
+# Use single Dockerfile with default ENV's, and overwite per-environment with ENTRYPOINT script !!!
+# Update default configs via ENV, RUN, ENTRYPOINT step 2 of 3:
+# OR use ENTRYPOINT
