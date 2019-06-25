@@ -1,22 +1,23 @@
 sudo: false
-
 language: php
-
 php:
   - 7.2
-
 branches:
   only:
-    - master
-    - "/^\\d+\\.\\d+\\.\\d+-?\\d+?$/"
-
+  - master
+  - "/^\\d+\\.\\d+\\.\\d+-?\\d+?$/"
 script:
   - echo "NO PHPUNIT tests"
-
 deploy:
   provider: releases
   api_key:
-    secure: sOBvDdc+l3tTcU18aetUa3P7KzwjNPen/9KYpCjFPTp4n0Aw0iaHTy6rTrk+E77hLd16cysPMbyIRTsI2uZ++YQmB9DjjDzkHCQ2+7GZwyzRQwtt2jdXZEB2kRRtp3gihah3TGQAZGyQwjrK5ecmFwXyc6P/gS0XI6VVegfwPnV1unF2iIJjhjkV65OkCWwqjTFQ7pr5Vs3fvSPQDHUgDGZu5Dp6SRnOJCtKDviz9FaBEfLynScwycfLE39XzEBNfEAWMxUB1w68oGeQDFMjKMG9s/pc2OYabPZKFrJs5vbIJyHq2P/PkyUzmhTfq5/u0pyNcdYbXVQri7PuOSmm3vJjnAW+7lgAC9yEYG3RaTqPvv7p9jvq9njvxeDqv/3OCtH/OWEbgGEfPY9ELj87w1t7VcgHBxJXxH3q2xmCnDgizlhddYv9/nsHPSSKySrZSPZKfMB+vP0nj1jwGnl7Lpgw8DJoPMvYQnvoELtn0jdwv4ImO/Itr4IzkHz/p6K9tBIt1/jZYGikgr7xUUP6rs8r8lvMJjoxfMRx7PLq4sXP0NZGrTTi+OeAnd4AePDDYAUD2TfEg+VSAAqJbzL64oNbNxYcG67Ev0cEV2bW91WuFA9tmbVlASUN3TXzNWi/aq2qupm6QlwADo3k+Hd1ikjs/suuVLqEYqtVgFAta6Q=
-    file: "build.tar.gz"
+    secure: FrIkSNCIG48q0nfc9WeVDaaPO2k8Ac4dKHH/WRumony6y3g1A478qZt4gTBg61e48xXsl8sqk9UvNp1TnzCGTz5XBJY9yM36jpBhySZJvCFI8x7RhNCWusiQOzY6IC3BP7GiY7aDNsLEXLbfGEQLEdBfMrEXghq1LFfuQnSS6gAJ4DsaeD8crPCL3vb2aAOrov3zDWdwA/2gBXRmq4ftfxIxSbinV3BMQ9Iiyd3tDSK7gz2rkivjnxaRE84vx3iAfpkb0cPckr8o3+/rg4FvzWt2Vgh7e+MRCIXCpK9c4Suyam8GFnsgP7aeT0w44L/fhUhRzEgmkbQBKXq9GX5m8275trRtPpoVUzNdWN/kZghgKWCEVaSSVtucVxh7gsBJW5luJQVnwUw9jgWZKXat5VKUwPfpLfha4//FF+j1+DKX3lgB5vB2clE1nl+kgVvCFwdKp0YlKxKGtq53O/SfUdyjWg728JxizYrlaaey2U0ozpP4t2Ks+6T4wTXOtRm7LbcumsHQGIgFCKwBQHPLZWM4cMm5uGDrhOtlHncEKShrCxRxUOAexFJmFR4ELaNZPQhF58HgmMruWP9YXYcCkozwHa8A5ZrQytuHKjduFzkJ4qujwezX6EAyUkkc575gX8qTujMqcFl9GKK0ZnGVwI5DiorG1TleQQDU6BbfgG0=
+    file: build.tar.gz
     skip_cleanup: true
     draft: true
+env:
+  global:
+  - secure: FrIkSNCIG48q0nfc9WeVDaaPO2k8Ac4dKHH/WRumony6y3g1A478qZt4gTBg61e48xXsl8sqk9UvNp1TnzCGTz5XBJY9yM36jpBhySZJvCFI8x7RhNCWusiQOzY6IC3BP7GiY7aDNsLEXLbfGEQLEdBfMrEXghq1LFfuQnSS6gAJ4DsaeD8crPCL3vb2aAOrov3zDWdwA/2gBXRmq4ftfxIxSbinV3BMQ9Iiyd3tDSK7gz2rkivjnxaRE84vx3iAfpkb0cPckr8o3+/rg4FvzWt2Vgh7e+MRCIXCpK9c4Suyam8GFnsgP7aeT0w44L/fhUhRzEgmkbQBKXq9GX5m8275trRtPpoVUzNdWN/kZghgKWCEVaSSVtucVxh7gsBJW5luJQVnwUw9jgWZKXat5VKUwPfpLfha4//FF+j1+DKX3lgB5vB2clE1nl+kgVvCFwdKp0YlKxKGtq53O/SfUdyjWg728JxizYrlaaey2U0ozpP4t2Ks+6T4wTXOtRm7LbcumsHQGIgFCKwBQHPLZWM4cMm5uGDrhOtlHncEKShrCxRxUOAexFJmFR4ELaNZPQhF58HgmMruWP9YXYcCkozwHa8A5ZrQytuHKjduFzkJ4qujwezX6EAyUkkc575gX8qTujMqcFl9GKK0ZnGVwI5DiorG1TleQQDU6BbfgG0=
+
+before_install:
+  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
