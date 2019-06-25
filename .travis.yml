@@ -16,7 +16,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: 26a37d9685c815174fcdd2650562ba5280667b9a
-    file: build.tar.gz
+    secure: d7444de9c963582d1a92a9891aafdf38034c2234
+    file: "build.tar.gz"
     skip_cleanup: true
     draft: true
