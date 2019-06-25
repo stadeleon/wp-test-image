@@ -30,5 +30,7 @@ deploy:
   file: build.tar.gz
   on:
     repo: stadeleon/wp-test-image
+    tags: true
+
 before_install:
 - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
