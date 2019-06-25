@@ -1,7 +1,7 @@
 # Allways use specific FROM tag, DON'T use 'latest'
 FROM wordpress:5.2.2-php7.2-apache
 
-# COPY . /var/www/html
+COPY . /var/www/html
 
 ## WP Plug-in AND Theme
 
