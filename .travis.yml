@@ -1,23 +1,34 @@
 sudo: false
 language: php
+
 php:
-  - 7.2
+- 7.2
+
+env:
+    global:
+      - secure: FrIkSNCIG48q0nfc9WeVDaaPO2k8Ac4dKHH/WRumony6y3g1A478qZt4gTBg61e48xXsl8sqk9UvNp1TnzCGTz5XBJY9yM36jpBhySZJvCFI8x7RhNCWusiQOzY6IC3BP7GiY7aDNsLEXLbfGEQLEdBfMrEXghq1LFfuQnSS6gAJ4DsaeD8crPCL3vb2aAOrov3zDWdwA/2gBXRmq4ftfxIxSbinV3BMQ9Iiyd3tDSK7gz2rkivjnxaRE84vx3iAfpkb0cPckr8o3+/rg4FvzWt2Vgh7e+MRCIXCpK9c4Suyam8GFnsgP7aeT0w44L/fhUhRzEgmkbQBKXq9GX5m8275trRtPpoVUzNdWN/kZghgKWCEVaSSVtucVxh7gsBJW5luJQVnwUw9jgWZKXat5VKUwPfpLfha4//FF+j1+DKX3lgB5vB2clE1nl+kgVvCFwdKp0YlKxKGtq53O/SfUdyjWg728JxizYrlaaey2U0ozpP4t2Ks+6T4wTXOtRm7LbcumsHQGIgFCKwBQHPLZWM4cMm5uGDrhOtlHncEKShrCxRxUOAexFJmFR4ELaNZPQhF58HgmMruWP9YXYcCkozwHa8A5ZrQytuHKjduFzkJ4qujwezX6EAyUkkc575gX8qTujMqcFl9GKK0ZnGVwI5DiorG1TleQQDU6BbfgG0=
+
 branches:
   only:
   - master
   - "/^\\d+\\.\\d+\\.\\d+-?\\d+?$/"
 script:
-  - echo "NO PHPUNIT tests"
+- echo "NO PHPUNIT tests"
+
+before_deploy:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - export REPO=stadeleon/$(echo $TRAVIS_REPO_SLUG |cut -d "/" -f2)
+  - docker build -f Dockerfile -t $REPO:$TRAVIS_TAG .
+  - docker push $REPO
+  - tar -czf build.tar.gz *
+  - rm -rf `ls | grep -v build.tar.gz`
+
 deploy:
   provider: releases
   api_key:
-    secure: FrIkSNCIG48q0nfc9WeVDaaPO2k8Ac4dKHH/WRumony6y3g1A478qZt4gTBg61e48xXsl8sqk9UvNp1TnzCGTz5XBJY9yM36jpBhySZJvCFI8x7RhNCWusiQOzY6IC3BP7GiY7aDNsLEXLbfGEQLEdBfMrEXghq1LFfuQnSS6gAJ4DsaeD8crPCL3vb2aAOrov3zDWdwA/2gBXRmq4ftfxIxSbinV3BMQ9Iiyd3tDSK7gz2rkivjnxaRE84vx3iAfpkb0cPckr8o3+/rg4FvzWt2Vgh7e+MRCIXCpK9c4Suyam8GFnsgP7aeT0w44L/fhUhRzEgmkbQBKXq9GX5m8275trRtPpoVUzNdWN/kZghgKWCEVaSSVtucVxh7gsBJW5luJQVnwUw9jgWZKXat5VKUwPfpLfha4//FF+j1+DKX3lgB5vB2clE1nl+kgVvCFwdKp0YlKxKGtq53O/SfUdyjWg728JxizYrlaaey2U0ozpP4t2Ks+6T4wTXOtRm7LbcumsHQGIgFCKwBQHPLZWM4cMm5uGDrhOtlHncEKShrCxRxUOAexFJmFR4ELaNZPQhF58HgmMruWP9YXYcCkozwHa8A5ZrQytuHKjduFzkJ4qujwezX6EAyUkkc575gX8qTujMqcFl9GKK0ZnGVwI5DiorG1TleQQDU6BbfgG0=
-    file: build.tar.gz
-    skip_cleanup: true
-    draft: true
-env:
-  global:
-  - secure: FrIkSNCIG48q0nfc9WeVDaaPO2k8Ac4dKHH/WRumony6y3g1A478qZt4gTBg61e48xXsl8sqk9UvNp1TnzCGTz5XBJY9yM36jpBhySZJvCFI8x7RhNCWusiQOzY6IC3BP7GiY7aDNsLEXLbfGEQLEdBfMrEXghq1LFfuQnSS6gAJ4DsaeD8crPCL3vb2aAOrov3zDWdwA/2gBXRmq4ftfxIxSbinV3BMQ9Iiyd3tDSK7gz2rkivjnxaRE84vx3iAfpkb0cPckr8o3+/rg4FvzWt2Vgh7e+MRCIXCpK9c4Suyam8GFnsgP7aeT0w44L/fhUhRzEgmkbQBKXq9GX5m8275trRtPpoVUzNdWN/kZghgKWCEVaSSVtucVxh7gsBJW5luJQVnwUw9jgWZKXat5VKUwPfpLfha4//FF+j1+DKX3lgB5vB2clE1nl+kgVvCFwdKp0YlKxKGtq53O/SfUdyjWg728JxizYrlaaey2U0ozpP4t2Ks+6T4wTXOtRm7LbcumsHQGIgFCKwBQHPLZWM4cMm5uGDrhOtlHncEKShrCxRxUOAexFJmFR4ELaNZPQhF58HgmMruWP9YXYcCkozwHa8A5ZrQytuHKjduFzkJ4qujwezX6EAyUkkc575gX8qTujMqcFl9GKK0ZnGVwI5DiorG1TleQQDU6BbfgG0=
-
+    secure: I7ztoqcJOPfQ+PLAq9BhUb3nauSmyBMOUWVIREkBkMeKvgFYcjkgQCz35/z/ab41Qi4TptiU6ZiIfG6YiRV1QPS9NIcoYKYNInqLJ0ePACCzjr7nkqIujp0ZQDXi4ohI3GRUg4KZkKdWL2ujjxZh7mN2r8ROadC1ewaTcVpmdPiAh/HdnfeKZjjwwZ+PDcc1TrumeSlnHr4ce2unib1CFrkFOL+vdjA/Q4xOWA1uvQJPhr0j/fsPsEcWarTCe2FoeAnYwhqn1r7zqC71FGDIKKLpj1CNP6jmeKwFG4dhH9UBzS7CDjakFkfbeH0Ba+AnY3CoU27ymNvjnv9QLgPPK5T0Jc+4SeyfL0mwNWijxPxwsdTALGA3wpZZCwJtxGV/oFzSVQNUXgFrN6uQLKMNIIlbTLvsfMl8WXUsP6lPfmLfBBb6KR9FyxDTomLFiNvbZalN6XsvCXUAA4fSCKv4I0OTHAZTPjPpW8xaK78Dj/dntUxd1lBJmM8GGAe91oZXsBpQ3BkYvqquLBUBfDBneEsznmxdz4p2qyo7yXPx6VYZvr2FWcVmL7K2p1iRJJ/NLnAVhp0DR5oEkIoau/UzlTE1pIkqdFPqjqfspcNE6Wll9poc9UEqMoG4PbzLB2NgSryu8MEPANR+xm+/sLF+vI5fBII1J2drSbN3feZENKM=
+  file: build.tar.gz
+  on:
+    repo: stadeleon/wp-test-image
 before_install:
-  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
+- composer config --global github-oauth.github.com "$GITHUB_TOKEN"
