@@ -3,7 +3,7 @@ sudo: false
 language: php
 
 php:
-  - "7.2"
+  - 7.2
 
 branches:
   only:
@@ -12,3 +12,11 @@ branches:
 
 script:
   - echo "NO PHPUNIT tests"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: 26a37d9685c815174fcdd2650562ba5280667b9a
+    file: build.tar.gz
+    skip_cleanup: true
+    draft: true
