@@ -16,7 +16,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: d7444de9c963582d1a92a9891aafdf38034c2234
+    secure: $GH_TOKEN
     file: "build.tar.gz"
     skip_cleanup: true
     draft: true
