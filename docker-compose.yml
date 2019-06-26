@@ -13,14 +13,14 @@ services:
 #       MYSQL_PASSWORD: wp-pass
 
    wp:
-#     build: .
-     image: stadeleon/wp-test-image
+     build: .
+#     image: stadeleon/wp-test-image:0.0.1-1
      depends_on:
        - mysql
      ports:
-       - 80:80
+#       - 80:80
 #     ports:
-#       - "8000:80"
+       - "8000:80"
      restart: always
      environment:
        WORDPRESS_DB_PASSWORD: root

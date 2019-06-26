@@ -1,28 +1,23 @@
 sudo: false
 language: php
-
 php:
 - 7.2
-
 env:
-    global:
-      - secure: FrIkSNCIG48q0nfc9WeVDaaPO2k8Ac4dKHH/WRumony6y3g1A478qZt4gTBg61e48xXsl8sqk9UvNp1TnzCGTz5XBJY9yM36jpBhySZJvCFI8x7RhNCWusiQOzY6IC3BP7GiY7aDNsLEXLbfGEQLEdBfMrEXghq1LFfuQnSS6gAJ4DsaeD8crPCL3vb2aAOrov3zDWdwA/2gBXRmq4ftfxIxSbinV3BMQ9Iiyd3tDSK7gz2rkivjnxaRE84vx3iAfpkb0cPckr8o3+/rg4FvzWt2Vgh7e+MRCIXCpK9c4Suyam8GFnsgP7aeT0w44L/fhUhRzEgmkbQBKXq9GX5m8275trRtPpoVUzNdWN/kZghgKWCEVaSSVtucVxh7gsBJW5luJQVnwUw9jgWZKXat5VKUwPfpLfha4//FF+j1+DKX3lgB5vB2clE1nl+kgVvCFwdKp0YlKxKGtq53O/SfUdyjWg728JxizYrlaaey2U0ozpP4t2Ks+6T4wTXOtRm7LbcumsHQGIgFCKwBQHPLZWM4cMm5uGDrhOtlHncEKShrCxRxUOAexFJmFR4ELaNZPQhF58HgmMruWP9YXYcCkozwHa8A5ZrQytuHKjduFzkJ4qujwezX6EAyUkkc575gX8qTujMqcFl9GKK0ZnGVwI5DiorG1TleQQDU6BbfgG0=
-
+  global:
+  - secure: pVamQ9PECyXT6P/capJZYkjQ9rhU6WJqPiyLXTxyBK30KqjW+H71TnSsC/Fq3IgVYRccNEOJCTzPCDQwOfXKkoUUZCrsNt9lUbb7F2xJfK603G8bYaS5UulgFNI333Vayeh8/ySe3S1rf0q3ZQkMtyPz1rZumdMlK3CBOWdR75a7mZVMXa1qXKFyoV51LyEW62r25+jnJmvpptpbMK6HKtZsDUGNlc/fxnoRdQdpjQN/c47FeLM9GysBMGbz7tyrQzi/FoM4mC3wwybcJN8JIZ5S1bOFYVO0YIg/AF2305Ianjx3KFwFWnsFsieHn/n5cUmaJndHcHpum4TJoP8++lRX5uUNZkuHlRvmng5joKTVxUGltzpInS9xVxqVkDVooXJvgtrskocZm5jgzKT7gfgnX8ZUx4wIrEjw1hqqRRSulhOuLfg+u+4LPcyJFEP4oDfnrMAvg62q4YuJjqMT5+Q5S1WA+7Vj+UD9iRjpLG8kRYmNzWhUE2I1BiJTAb4rZ/M8kI2jIvrQKcwJ2EAp5yZYWszEmy4KrK+/mtgrpG+hauPtvHbNBFsogN7YxDPVYq3yS0Ry62cymFhCjMrglZLlkt0bSd7TYaq65T5jp6108BexG8yxeuAqH5xUQKT8+Qb7wYsmZmotTobC2OFrVJjzLaLS6sf9LiGXyYfPZ7c=
 branches:
   only:
   - master
   - "/^\\d+\\.\\d+\\.\\d+-?\\d+?$/"
 script:
 - echo "NO PHPUNIT tests"
-
 before_deploy:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - export REPO=stadeleon/$(echo $TRAVIS_REPO_SLUG |cut -d "/" -f2)
-  - docker build -f Dockerfile -t $REPO:$TRAVIS_TAG .
-  - docker push $REPO
-  - tar -czf build.tar.gz *
-  - rm -rf `ls | grep -v build.tar.gz`
-
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+- export REPO=stadeleon/$(echo $TRAVIS_REPO_SLUG |cut -d "/" -f2)
+- docker build -f Dockerfile -t $REPO:$TRAVIS_TAG .
+- docker push $REPO
+- tar -czf build.tar.gz *
+- rm -rf `ls | grep -v build.tar.gz`
 deploy:
   provider: releases
   api_key:
@@ -31,6 +26,6 @@ deploy:
   on:
     repo: stadeleon/wp-test-image
     tags: true
-
 before_install:
-- composer config --global github-oauth.github.com "$GITHUB_TOKEN"
+  - openssl aes-256-cbc -K $encrypted_9706fc677e49_key -iv $encrypted_9706fc677e49_iv -in github_deploy_key.enc -out ~\/github_deploy_key -d
+#  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
