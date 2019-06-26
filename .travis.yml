@@ -27,5 +27,4 @@ deploy:
     repo: stadeleon/wp-test-image
     tags: true
 before_install:
-  - openssl aes-256-cbc -K $encrypted_9706fc677e49_key -iv $encrypted_9706fc677e49_iv -in github_deploy_key.enc -out ~\/github_deploy_key -d
   - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
