@@ -1,24 +1,44 @@
-version: '3'
+version: '3.3'
 
 services:
-   mysql:
-     image: mysql:5.7
-     volumes:
-       - db_data:/var/lib/mysql
-     restart: always
-     environment:
-       MYSQL_ROOT_PASSWORD: root
-#       MYSQL_DATABASE: wp-test-db
-#       MYSQL_USER: wp-user
-#       MYSQL_PASSWORD: wp-pass
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8088:80"
+    volumes:
+      - sessions:/sessions
+    restart: always
+    environment:
+#        - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - MYSQL_USER=default
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_HOST=mysql
 
-   wp:
+  mysql:
+     image: mysql:5.7
+     ports:
+       - "3306:3306"
+       depends_on:
+         - phpmyadmin
+       volumes:
+         - /var/lib/mysql:/var/lib/mysql
+       restart: always
+       environment:
+         MYSQL_ROOT_PASSWORD: root
+         MYSQL_DATABASE: wp_test
+         MYSQL_USER: wpuser
+         MYSQL_PASSWORD: wppassword
+
+  wp:
      build: .
-#     image: stadeleon/wp-test-image:0.0.1-1
+#     image: stadeleon/wp-test-image:0.0.1-6
      depends_on:
        - mysql
      ports:
 #       - 80:80
+#       - 443:443
 #     ports:
        - "8000:80"
      restart: always
@@ -27,4 +47,8 @@ services:
 #       WORDPRESS_DB_HOST: db:3306
 #       WORDPRESS_DB_USER: root
 volumes:
-    db_data:
+  sessions: {}
+  mysql:
+    driver: "local"
+  phpmyadmin:
+    driver: "local"
