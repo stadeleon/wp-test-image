@@ -23,9 +23,9 @@ deploy:
   api_key:
     secure: I7ztoqcJOPfQ+PLAq9BhUb3nauSmyBMOUWVIREkBkMeKvgFYcjkgQCz35/z/ab41Qi4TptiU6ZiIfG6YiRV1QPS9NIcoYKYNInqLJ0ePACCzjr7nkqIujp0ZQDXi4ohI3GRUg4KZkKdWL2ujjxZh7mN2r8ROadC1ewaTcVpmdPiAh/HdnfeKZjjwwZ+PDcc1TrumeSlnHr4ce2unib1CFrkFOL+vdjA/Q4xOWA1uvQJPhr0j/fsPsEcWarTCe2FoeAnYwhqn1r7zqC71FGDIKKLpj1CNP6jmeKwFG4dhH9UBzS7CDjakFkfbeH0Ba+AnY3CoU27ymNvjnv9QLgPPK5T0Jc+4SeyfL0mwNWijxPxwsdTALGA3wpZZCwJtxGV/oFzSVQNUXgFrN6uQLKMNIIlbTLvsfMl8WXUsP6lPfmLfBBb6KR9FyxDTomLFiNvbZalN6XsvCXUAA4fSCKv4I0OTHAZTPjPpW8xaK78Dj/dntUxd1lBJmM8GGAe91oZXsBpQ3BkYvqquLBUBfDBneEsznmxdz4p2qyo7yXPx6VYZvr2FWcVmL7K2p1iRJJ/NLnAVhp0DR5oEkIoau/UzlTE1pIkqdFPqjqfspcNE6Wll9poc9UEqMoG4PbzLB2NgSryu8MEPANR+xm+/sLF+vI5fBII1J2drSbN3feZENKM=
   file: build.tar.gz
+  skip_cleanup: true
   on:
     repo: stadeleon/wp-test-image
     tags: true
 before_install:
-  - openssl aes-256-cbc -K $encrypted_9706fc677e49_key -iv $encrypted_9706fc677e49_iv -in github_deploy_key.enc -out ~\/github_deploy_key -d
-#  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
+  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
