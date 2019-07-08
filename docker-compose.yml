@@ -1,8 +1,12 @@
-version: '3.3'
+version: '3.4'
 
 services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    networks:
+      - docker_net
     ports:
       - "8088:80"
     volumes:
@@ -18,24 +22,28 @@ services:
 
   mysql:
      image: mysql:5.7
+     networks:
+       - docker_net
      ports:
        - "3306:3306"
-       depends_on:
-         - phpmyadmin
-       volumes:
-         - /var/lib/mysql:/var/lib/mysql
-       restart: always
-       environment:
-         MYSQL_ROOT_PASSWORD: root
-         MYSQL_DATABASE: wp_test
-         MYSQL_USER: wpuser
-         MYSQL_PASSWORD: wppassword
+     volumes:
+       - /var/lib/mysql:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: wp_test
+       MYSQL_USER: wpuser
+       MYSQL_PASSWORD: wppassword
 
   wp:
      build: .
 #     image: stadeleon/wp-test-image:0.0.1-6
      depends_on:
        - mysql
+     volumes:
+       - ./wp-content:/var/www/html/wp-content/
+     networks:
+       - docker_net
      ports:
 #       - 80:80
 #       - 443:443
@@ -44,11 +52,15 @@ services:
      restart: always
      environment:
        WORDPRESS_DB_PASSWORD: root
+       WORDPRESS_DB_USER: root
+       WORDPRESS_DB_NAME: wp_test
 #       WORDPRESS_DB_HOST: db:3306
-#       WORDPRESS_DB_USER: root
 volumes:
   sessions: {}
   mysql:
     driver: "local"
   phpmyadmin:
     driver: "local"
+
+networks:
+  docker_net:

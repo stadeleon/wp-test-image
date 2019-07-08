@@ -1,10 +1,33 @@
 # Allways use specific FROM tag, DON'T use 'latest'
-FROM wordpress:5.2.2-php7.2-apache
+FROM wordpress:5.2.2-php7.3-apache
+USER root
 
-RUN apt-get update -y && apt install -yq vim iputils-ping
+# Add a non-root user to prevent files being created with root permissions on host machine.
+ARG PUID=1000
+ARG PGID=1000
+
+ENV PUID ${PUID}
+ENV PGID ${PGID}
+RUN usermod --non-unique --uid ${PUID} www-data
+RUN groupmod --non-unique --gid ${PGID} www-data
+
+RUN mkdir -p /home/www-data
+
+RUN apt-get update -y && apt-get install -yq vim iputils-ping
 RUN apt-get clean
-COPY . /var/www/html
+#ADD php.ini /usr/local/etc/php
+RUN touch /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "upload_max_filesize = 10M;" >> /usr/local/etc/php/conf.d/uploads.ini
 
+#COPY . /var/www/html
+#RUN mkdir /var/www/html/wp-content/uploads
+#RUN mkdir -p /var/www/html/wp-content/themes/allegiant/
+WORKDIR /var/www/html
+
+#COPY allegiant /var/www/html/wp-content/themes/allegiant/
+RUN chown -R ${PGID}:${PUID} /var/www/html
+RUN ls -la
+#RUN "echo 'php_value upload_max_filesize 256M' > '/var/www/html/.htaccess'"
 ## WP Plug-in AND Theme
 
 #CREATE USER 'root'@'%' IDENTIFIED BY 'rootpassword';
@@ -22,7 +45,4 @@ COPY . /var/www/html
 #COPY mytheme2 /var/www/html/wp-content/themes/mytheme2/
 #COPY myplugin1 /var/www/html/wp-content/plugins/myplugin1/
 #COPY myplugin2 /var/www/html/wp-content/plugins/myplugin2/*
-
-
-
 

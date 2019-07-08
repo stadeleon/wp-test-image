@@ -1,0 +1,215 @@
+/*
+Theme Name: yosemite
+
+Adding support for languages written in a Right To Left (RTL) direction is easy -
+it's just a matter of overwriting all the horizontal positioning attributes
+of your CSS stylesheet in a separate stylesheet file named rtl.css.
+
+https://codex.wordpress.org/Right-to-Left_Language_Support
+
+*/
+
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+	text-align: right;
+}
+
+.site-content .widget-area {
+	margin-right: auto;
+	margin-left: 0;
+}
+
+.site-description:before {
+	left: 26px;
+}
+
+.site-description:after {
+	left: -23px;
+}
+
+.main-navigation .nav-menu.menu {
+	margin-left: 0;
+	margin-right: -24px;
+}
+
+.main-navigation li {
+	float: right;
+}
+
+.main-navigation li.menu-item-has-children > a:after,
+.main-navigation li.page_item_has_children > a:after {
+	padding-left: 0;
+	padding-right: 7px;
+}
+
+.main-navigation ul {
+	padding: 0;
+}
+
+.main-navigation ul ul ul{
+	left: 0;
+}
+
+.main-navigation ul ul li:hover > ul, .main-navigation ul ul li.focus > ul {
+	right: 100%;
+	left: 0;
+	width: 100%;
+}
+
+.mobile-menu .dropdown-toggle {
+	right: -10px;
+}
+
+.main-navigation li li.menu-item-has-children > a:after,
+.main-navigation li li.page_item_has_children > a:after {
+	content: "\f104";
+	right: auto;
+	left: 0;
+	padding-left: 10px;
+	padding-right: 0;
+}
+
+.right-column {
+	margin-right: auto;
+}
+
+
+/** Entry content **/
+
+.entry-content li {
+	text-align: right;
+}
+
+.entry-meta li {
+	float: right;
+	margin-left: 20px;
+	margin-right: 0;
+}
+
+.entry-meta i {
+	margin: 0 0 0 7px;
+}
+
+.entry-meta li i {
+	margin-left: 7px;
+	margin-right: 0;
+}
+
+.entry-meta li:after {
+	content: "/";
+	margin-left: 0px;
+	margin-right: 20px;
+}
+
+.first-post article .entry-title,
+.first-post article .entry-content {
+	text-align: center;
+}
+
+.first-post .entry-footer .entry-meta:last-child {
+	text-align: left;
+}
+
+.following-post article .entry-title {
+	text-align: right;
+}
+
+.entry-meta span:not(:first-child):before {
+	margin-left: 10px;
+}
+
+
+/* header */
+
+.search-form .search-submit {
+	left: 0;
+	right: auto;
+}
+
+.header-content .search-field {
+	padding: 0 0 0 40px;
+}
+
+.header-content .jetpack-social-navigation {
+	padding: 0 0 0 32px;
+}
+
+/* Contact form */
+
+.contact-form label {
+	display: block;
+	margin-bottom: 3px;
+}
+
+.contact-form div input[type=text],
+.contact-form div input[type=email] {
+	width: 370px;
+	padding: 7px 10px;
+}
+
+.contact-form input[type='text'],
+.contact-form input[type='email'] {
+	max-width: 98%;
+	margin-bottom: 13px;
+}
+
+
+/** Widget  **/
+
+.widget ul li {
+	text-align: right;
+	display: block;
+}
+
+.widget ul li:before {
+	margin-left: 12px;
+}
+
+.widget ul li a {
+	display: inline-block;
+}
+
+.widget-area .tagcloud {
+	overflow: hidden;
+}
+
+.widget-area .tagcloud a {
+	float: right;
+}
+
+.widget_yosemite-recent-posts ul li {
+	display: flex;
+}
+
+.widget_yosemite-recent-posts .recent-post__image {
+	margin-right: 0;
+	margin-left: 20px;
+}
+
+.widget_yosemite-recent-posts .recent-post__text {
+	flex: 1;
+	text-align: right;
+}
+
+.recentcomments:before {
+	margin: 0 0 0 12px;
+}
+
+.nav-previous {
+	text-align: left;
+	padding-right: 0;
+}
+
+.nav-next {
+	text-align: right;
+}
+
+.nav-previous + .nav-next {
+	padding-left: 0;
+}
+
+/* Footer */
+.site-footer .menu a:before {
+	margin: 0 0 0 10px;
+}

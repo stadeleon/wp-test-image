@@ -1,0 +1,263 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-19 12:22+0545\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: 404.php:17
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the links "
+"below or a search?"
+msgstr ""
+
+#: comments.php:35
+#, php-format
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#: comments.php:41
+#, php-format
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:66
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:69
+#, php-format
+msgid "%1$s by %2$s"
+msgstr ""
+
+#: footer.php:69
+msgid "StaDeLeons Blog"
+msgstr ""
+
+#: footer.php:69
+msgid "Leo Themes"
+msgstr ""
+
+#: functions.php:47
+msgid "Primary"
+msgstr ""
+
+#: functions.php:48
+msgid "Social"
+msgstr ""
+
+#: functions.php:103
+msgid "Blue"
+msgstr ""
+
+#: functions.php:108
+msgid "Green"
+msgstr ""
+
+#: functions.php:113
+msgid "Orange"
+msgstr ""
+
+#: functions.php:118
+msgid "Black"
+msgstr ""
+
+#: functions.php:123
+msgid "Grey"
+msgstr ""
+
+#: functions.php:132
+msgid "small"
+msgstr ""
+
+#: functions.php:133
+msgid "S"
+msgstr ""
+
+#: functions.php:138
+msgid "regular"
+msgstr ""
+
+#: functions.php:139
+msgid "M"
+msgstr ""
+
+#: functions.php:144
+msgid "larger"
+msgstr ""
+
+#: functions.php:145
+msgid "L"
+msgstr ""
+
+#: functions.php:150
+msgid "huge"
+msgstr ""
+
+#: functions.php:151
+msgid "XL"
+msgstr ""
+
+#: functions.php:184
+msgid "Primary Sidebar"
+msgstr ""
+
+#: functions.php:195
+#, php-format
+msgid "Footer Sidebar %d"
+msgstr ""
+
+#: functions.php:216
+msgctxt "Montserrat font: on or off"
+msgid "on"
+msgstr ""
+
+#: inc/customizer.php:47
+msgid "StaDeLeon's Blog Pro"
+msgstr ""
+
+#: inc/customizer.php:48
+msgid "BUY PRO"
+msgstr ""
+
+#: inc/customizer.php:66
+msgid "Logo Options"
+msgstr ""
+
+#: inc/customizer.php:69
+msgid "Logo Only"
+msgstr ""
+
+#: inc/customizer.php:70
+msgid "Title Only"
+msgstr ""
+
+#: inc/customizer.php:71
+msgid "Title + Tagline"
+msgstr ""
+
+#: inc/customizer.php:79
+msgid "Theme Options"
+msgstr ""
+
+#: inc/customizer.php:87
+msgid "Header"
+msgstr ""
+
+#: inc/customizer.php:102
+msgid "Show Social Icons"
+msgstr ""
+
+#: inc/customizer.php:112
+msgid "Layouts"
+msgstr ""
+
+#: inc/customizer.php:127
+msgid "Default Sidebar Layout"
+msgstr ""
+
+#: inc/customizer.php:132
+msgid "Left Sidebar"
+msgstr ""
+
+#: inc/customizer.php:133
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/customizer.php:134
+msgid "No Sidebar"
+msgstr ""
+
+#: inc/customizer.php:148
+msgid "Excerpt Length"
+msgstr ""
+
+#: inc/customizer.php:159 inc/template-functions.php:159
+msgid "Read More"
+msgstr ""
+
+#: inc/customizer.php:165
+msgid "Read More Text"
+msgstr ""
+
+#: inc/customizer.php:175
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php:184 inc/template-functions.php:160
+msgid "Copyright © All rights reserved."
+msgstr ""
+
+#: inc/customizer.php:190
+msgid "Copyright Text"
+msgstr ""
+
+#: inc/template-functions.php:204
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: inc/template-functions.php:206
+msgid "Oops! That page can&#39;t be found."
+msgstr ""
+
+#: inc/template-tags.php:62
+#, php-format
+msgid "No Comments<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: inc/template-tags.php:76
+msgid " "
+msgstr ""
+
+#: inc/template-tags.php:85
+#, php-format
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: inc/template-tags.php:108
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:24
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:18 template-parts/content-single.php:23
+msgid "Pages:"
+msgstr ""
